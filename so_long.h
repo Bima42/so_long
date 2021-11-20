@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 17:30:48 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/20 14:25:10 by tpauvret         ###   ########.fr       */
+/*   Created: 2021/11/20 14:13:55 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/11/20 18:19:31 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
+# define BUFFER_SIZE 10
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <string.h>
-# include <fcntl.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include "get_next_line/get_next_line.h"
 
-char		*ft_strjoin(char const *s1, char const *s2);
-char		*ft_substr(char const *s, unsigned int start, size_t len);
-char		*get_next_line(int fd);
-char		*ft_strdup(const char *s1);
-size_t		ft_strlen(const char *str);
+typedef struct	s_map
+{
+	int	empty;
+	int	wall;
+	int	coin;
+	int	exit;
+	int	pos;
+}				t_map;
 
 #endif
