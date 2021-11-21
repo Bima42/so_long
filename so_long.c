@@ -17,9 +17,9 @@ int	count_lines(int argc, char **argv)
 	int		nb_lines;
 	int		fd;
 	char	*line;
-	
+
 	nb_lines = 0;
-	line = NULL;;
+	line = NULL;
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		exit(0);
@@ -31,12 +31,20 @@ int	count_lines(int argc, char **argv)
 			//ADD CHECK ERROR HERE
 			if (line == NULL)
 			{
-				if (close(fd) == -1)
+				int	i;
+				i = close(fd);
+				if (i == -1)
 					exit(0);
 				return (nb_lines);
 			}
+			free(line);
 			nb_lines++;
 		}
+	}
+	else
+	{
+		write(1, "Error\n", 6);
+		exit(0);
 	}
 	return (nb_lines);
 }
@@ -50,7 +58,7 @@ void	init(t_map *map)
 	map->pos = 0;
 }
 
-void	check_error(char *line, t_map *data)
+void	check_map(char *line, t_map *data)
 {
 	int		i;
 
@@ -67,6 +75,11 @@ void	check_error(char *line, t_map *data)
 			data->exit++;
 		else if (line[i] == 'P')
 			data->pos++;
+		else
+		{
+			write(1, "Error map\n", 10);
+			exit(0);
+		}
 		i++;
 	}
 }
@@ -76,8 +89,20 @@ char	*get_line(int fd, t_map *data)
 	char	*line;
 
 	line = get_next_line(fd);
-	check_error(line, data);
+	check_map(line, data);
 	return (line);
+}
+
+int	check_wall(char *line)
+{
+	while (*line != '\n')
+	{
+		if (*line == '1')
+			line++;
+		else
+			return (0);
+	}
+	return (1);
 }
 
 char	**parsing_map(int argc, char **argv)
@@ -95,12 +120,8 @@ char	**parsing_map(int argc, char **argv)
 	map = malloc(sizeof(char *) * nb_lines);
 	if (!map)
 		return (NULL);
-	while (nb_lines > 0)
-	{
-		map[i] = get_line(fd, &data);
-		i++;
-		nb_lines--;
-	}
+	while (nb_lines-- > 0)
+		map[i++] = get_line(fd, &data);
 	return (map);
 }
 
@@ -110,7 +131,7 @@ int	main(int argc, char **argv)
 	int i = 0;
 
 	map = parsing_map(argc, argv);
-	while (map != NULL)
+	while (i != 5)
 	{
 		printf("%s", map[i]);
 		i++;
