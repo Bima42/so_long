@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:30:39 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/20 16:08:00 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:42:20 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static char	*return_readed_lines(char **keep, char **tmp, int readed)
 	index_nl = index_new_line(*keep) + 1;
 	if (index_nl > 0)
 	{
-		ret = ft_substr(*keep, 0, index_nl);
+		ret = ft_substr(*keep, 0, index_nl - 1);
 		if (!ret)
 			return (NULL);
 		*tmp = ft_substr(*keep, index_nl, (ft_strlen(*keep) - index_nl));

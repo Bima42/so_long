@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 14:13:55 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/20 18:19:31 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:55:25 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct	s_map
 	int	coin;
 	int	exit;
 	int	pos;
+	int	nb_lines;
 }				t_map;
 
 #endif
