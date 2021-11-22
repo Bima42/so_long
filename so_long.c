@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 14:13:44 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/11/22 14:59:36 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:30:27 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,33 @@ void	write_error(void)
 	exit(0);
 }
 
+void	check_wall_2(char **map, size_t len)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][0] == '1')
+			i++;
+		else
+			write_error();
+	}
+	i = 0;
+	while (map[i])
+	{
+		if (map[i][len] == '1')
+			i++;
+		else
+			write_error();
+	}
+	if (i >= (int)len)
+	{
+		write(1, "Map is not rectangular\n", 23);
+		exit(0);
+	}
+}
+
 void	check_wall(char **map, t_map data)
 {
 	size_t	len;
@@ -136,27 +163,7 @@ void	check_wall(char **map, t_map data)
 		else
 			write_error();
 	}
-	i = 0;
-	while (map[i])
-	{
-		if (map[i][0] == '1')
-			i++;
-		else
-			write_error();
-	}
-	i = 0;
-	while (map[i])
-	{
-		if (map[i][len] == '1')
-			i++;
-		else
-			write_error();
-	}
-	if (i >= (int)len)
-	{
-		write(1, "Map is not rectangular\n", 23);
-		exit(0);
-	}
+	check_wall_2(map, len);
 }
 
 char	**parsing_map(int argc, char **argv)
