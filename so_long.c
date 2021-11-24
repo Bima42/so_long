@@ -17,7 +17,7 @@ int	count_lines(int argc, char **argv)
 	int		nb_lines;
 	int		fd;
 	char	*line;
-	
+
 	nb_lines = 0;
 	line = NULL;
 	fd = open(argv[1], O_RDONLY);
