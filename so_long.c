@@ -106,7 +106,7 @@ void	write_error(void)
 	exit(0);
 }
 
-void	check_wall_2(char **map, size_t len)
+void	check_wall_3(char **map, size_t len)
 {
 	int	i;
 
@@ -133,20 +133,10 @@ void	check_wall_2(char **map, size_t len)
 	}
 }
 
-void	check_wall(char **map, t_map data)
+void	check_wall_2(char **map, t_map data)
 {
-	size_t	len;
 	int	i;
 
-	i = 0;
-	len = ft_strlen(map[0]) - 1;
-	while (i != data.nb_lines)
-	{
-		if (len == ft_strlen(map[i]) - 1)
-			i++;
-		else
-			write_error();
-	}
 	i = 0;
 	while (map[0][i])
 	{
@@ -163,7 +153,24 @@ void	check_wall(char **map, t_map data)
 		else
 			write_error();
 	}
-	check_wall_2(map, len);
+}
+
+void	check_wall(char **map, t_map data)
+{
+	int		i;
+	size_t	len;
+
+	i = 0;
+	len = ft_strlen(map[0]) - 1;
+	while (i != data.nb_lines)
+	{
+		if (len == ft_strlen(map[i]) - 1)
+			i++;
+		else
+			write_error();
+	}
+	check_wall_2(map, data);
+	check_wall_3(map, len);
 }
 
 char	**parsing_map(int argc, char **argv)
