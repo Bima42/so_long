@@ -3,6 +3,7 @@ NAME = so_long
 SRCS = 	so_long.c \
 		check_error.c \
 		parsing_map.c \
+		clear.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 
@@ -21,7 +22,7 @@ LIBFT = libft.a
 LIBFT_DIR = libft
 
 CC = clang
-CFLAGS = -g -fsanitize=address -I $(HEADERS)
+CFLAGS = -Wall -Wextra -Werror -g -I $(HEADERS)
 LFLAGS = $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -L $(MLX_DIR) #-fsanitize=address -g
 
 UNAME = $(shell uname -s)

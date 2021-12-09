@@ -56,6 +56,11 @@ void	set_data(char *line, t_map *data)
 			data->exit++;
 		else if (line[i] == 'P')
 			data->pos++;
+		else
+		{
+			write(1, "Error, caracters can't be used.\n", 32);
+			exit(0);
+		}
 		i++;
 	}
 }

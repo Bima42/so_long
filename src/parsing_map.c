@@ -17,7 +17,7 @@ char	**parsing_map(int argc, char **argv)
 		return (NULL);
 	while (nb_lines-- > 0)
 		map[i++] = get_line(fd, &data);
-	map[i] = NULL;
+	map[i] = 0;
 	if (close(fd) == -1)
 		exit(0);
 	check_data(data);

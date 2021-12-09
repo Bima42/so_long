@@ -23,5 +23,6 @@ int	main(int argc, char **argv)
 		printf("%s\n", map[i]);
 		i++;
 	}
+	free(map);
 	return (0);
 }
