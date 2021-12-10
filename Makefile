@@ -4,6 +4,7 @@ SRCS = 	so_long.c \
 		check_error.c \
 		parsing_map.c \
 		clear.c \
+		manage_window.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 

@@ -60,5 +60,7 @@ char	*get_line(int fd, t_map *data);
 void	check_data(t_map data);
 int	    count_lines(int argc, char **argv);
 
+//Manage window
+void	my_mlx_pixel_put(t_map *map, int x, int y, int color);
 
 #endif
