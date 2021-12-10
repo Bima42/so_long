@@ -12,17 +12,28 @@
 
 #include "so_long.h"
 
+void	my_mlx_pixel_put(t_map *map, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = map->addr + (y * map->line_length + x * (map->bits_pixel / 8));
+	*(unsigned int*)dst = color;
+}
+
 int	main(int argc, char **argv)
 {
-	char	**map;
-	int i = 0;
+	char	**tab;
+	void	*mlx;
+	void	*mlx_win;
+	t_map	map;
 
-	map = parsing_map(argc, argv);
-	while (i < 5)
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-	free(map);
+	tab = parsing_map(argc, argv);
+	mlx = mlx_init();
+	mlx_win = mlx_new_window(mlx, 1920, 1080, "Bima");
+	map.img = mlx_new_image(mlx, 1920, 1080);
+	map.addr = mlx_get_data_addr(map.img, &map.bits_pixel, &map.line_length, &map.endian);
+	my_mlx_pixel_put(&map, 5, 5, 0x00FF0000);
+	mlx_put_image_to_window(mlx, mlx_win, map.img, 0, 0);
+	mlx_loop(mlx);
 	return (0);
 }

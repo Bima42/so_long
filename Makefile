@@ -30,8 +30,6 @@ ifeq ($(UNAME), Linux)
     LFLAGS = $(CFLAGS) -lmlx -lXext -lX11 -lm -L $(MLX_DIR)
 endif
 
-.PHONY : all mlx mlx_clean clean fclean re
-
 all: $(NAME)
 
 $(NAME): $(_OBJS)
@@ -69,3 +67,4 @@ fclean:
 			$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
+.PHONY : all mlx mlx_clean clean fclean re

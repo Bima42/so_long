@@ -20,10 +20,16 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <mlx.h>
 #include "get_next_line/get_next_line.h"
 
 typedef struct	s_map
 {
+	void	*img;
+	char	*addr;
+	int	bits_pixel;
+	int	line_length;
+	int	endian;
 	int	empty;
 	int	wall;
 	int	coin;
