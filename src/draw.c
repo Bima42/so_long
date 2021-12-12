@@ -8,18 +8,24 @@ void	draw_map(t_game *game)
 	game->mlx_win = mlx_new_window(game->mlx, 1280, 600, "so_long");
 	game->img.img = mlx_new_image(game->mlx, 1280, 600);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_pixel, &game->img.line_length, &game->img.endian);
-	texture_load(game);
+	texture_load(&game);
 	draw_frame(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, x, y);
 	mlx_loop(game->mlx);
 }
 
-void	texture_load(t_game *game)
+void	texture_load(t_game **game)
 {
-	game->wall.img = mlx_xpm_file_to_image(game->mlx, "./asset/wall.xpm", &game->wall.width, &game->wall.height);
-	game->wall.addr = mlx_get_data_addr(game->wall.img, &game->wall.bits_pixel, &game->wall.line_length, &game->wall.endian);
-	game->player.img = mlx_xpm_file_to_image(game->mlx, "./asset/player.xpm", &game->player.width, &game->player.height);
-	game->player.addr = mlx_get_data_addr(game->player.img, &game->player.bits_pixel, &game->player.line_length, &game->player.endian);
+	load_one_texture(*game, &(*game)->player, "./asset/player.xpm");
+	load_one_texture(*game, &(*game)->wall, "./asset/wall.xpm");
+	load_one_texture(*game, &(*game)->door, "./asset/door.xpm");
+	load_one_texture(*game, &(*game)->item, "./asset/item.xpm");
+}
+
+void	load_one_texture(t_game *game, t_img *tex, char *path)
+{
+	tex->img = mlx_xpm_file_to_image(game->mlx, path, &tex->width, &tex->height);
+	tex->addr = mlx_get_data_addr(tex->img, &tex->bits_pixel, &tex->line_length, &tex->endian);
 }
 
 char    *get_sprite_color(t_img *tex, int x, int y, int cubesize)
@@ -112,5 +118,11 @@ t_img	*texture_choice(t_game *game, char c)
 		return (&game->player);
 	else if (c == '1')
 		return (&game->wall);
+	else if (c == 'E')
+		return (&game->door);
+	else if (c == 'C')
+		return (&game->item);
+	else if (c == '0')
+		return (NULL);
 	return (NULL);
 }

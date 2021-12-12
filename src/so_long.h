@@ -58,6 +58,8 @@ typedef struct	s_game
 	t_img	img;
 	t_img	wall;
 	t_img	player;
+	t_img	door;
+	t_img	item;
 }				t_game;
 
 //Parsing_map
@@ -79,12 +81,13 @@ void	my_mlx_pixel_put(t_img *map, int x, int y, int color);
 
 //Draw
 void	draw_map(t_game *game);
-void	texture_load(t_game *game);
+void	texture_load(t_game **game);
 char    *get_sprite_color(t_img *tex, int x, int y, int cubesize);
 void	draw(t_game *game, int x, int y);
 int    color_trans(t_img *tex, char *color);
 void	draw_frame(t_game *game);
 int    my_mlx_pixel_get(t_img t, int x, int y);
 t_img	*texture_choice(t_game *game, char c);
+void	load_one_texture(t_game *game, t_img *tex, char *path);
 
 #endif
