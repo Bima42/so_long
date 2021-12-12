@@ -5,13 +5,63 @@ void	draw_map(t_game *game)
 	int x = 0, y = 0;;
 
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, 1280, 600, "so_long");
-	game->img.img = mlx_new_image(game->mlx, 1280, 600);
+	create_window(game);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_pixel, &game->img.line_length, &game->img.endian);
 	texture_load(&game);
 	draw_frame(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, x, y);
 	mlx_loop(game->mlx);
+}
+
+void	create_window(t_game *game)
+{
+//	mlx_get_screen_size(game->mlx, &game->screen_res.x, &game->screen_res.y);
+	game->screen_res.x = 1280;
+	game->screen_res.y = 800;
+	game->size = get_size(game->screen_res, game->map);
+	game->screen_res.x = game->size * ft_strlen(*game->map);
+	game->screen_res.y = game->size * get_array_size(game->map);
+	game->mlx_win = mlx_new_window(game->mlx, game->screen_res.x, game->screen_res.y, "so_long");
+	game->img.img = mlx_new_image(game->mlx, game->screen_res.x, game->screen_res.y);
+}
+
+int	get_size(t_coord res, char **map)
+{
+	t_coord	size;
+	int		len_line;
+	int		len_array;
+
+	len_line = ft_strlen(*map);
+	len_array = get_array_size(map);
+	size.x = res.x / len_line;
+	size.y = res.y / len_array;
+	if (size.x <= size.y)
+	{
+		if (size.y * len_line > res.x)
+			size.y = res.x - 1;
+	}
+	else
+	{
+		if (size.x * len_array > res.y)
+			res.x = res.y - 1;
+	}
+	if (size.x < size.y)
+	{
+		if (size.x < 1)
+			return (1);
+		return (size.x);
+	}
+	return (size.y);
+}
+
+int	get_array_size(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+		i++;
+	return (i);
 }
 
 void	texture_load(t_game **game)

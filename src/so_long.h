@@ -20,7 +20,7 @@
 #include <fcntl.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <mlx.h>
+#include "mlx.h"
 #include "get_next_line/get_next_line.h"
 
 typedef struct	s_map
@@ -55,6 +55,8 @@ typedef struct	s_game
 	char	**map;
 	void	*mlx;
 	void	*mlx_win;
+	int		size;
+	t_coord	screen_res;
 	t_img	img;
 	t_img	wall;
 	t_img	player;
@@ -89,5 +91,8 @@ void	draw_frame(t_game *game);
 int    my_mlx_pixel_get(t_img t, int x, int y);
 t_img	*texture_choice(t_game *game, char c);
 void	load_one_texture(t_game *game, t_img *tex, char *path);
+void	create_window(t_game *game);
+int	get_size(t_coord res, char **map);
+int	get_array_size(char **map);
 
 #endif
