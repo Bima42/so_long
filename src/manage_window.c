@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-void	my_mlx_pixel_put(t_map *map, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *map, int x, int y, int color)
 {
 	char	*dst;
 

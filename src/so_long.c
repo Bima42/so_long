@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	char	**tab;
 	void	*mlx;
 	void	*mlx_win;
-	t_map	map;
+	t_img	map;
 	int x = 0, y = 0;;
 
 	tab = parsing_map(argc, argv);

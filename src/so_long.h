@@ -25,26 +25,36 @@
 
 typedef struct	s_map
 {
-	void	*img;
-	char	*addr;
-	int	bits_pixel;
-	int	line_length;
-	int	endian;
 	int	empty;
 	int	wall;
 	int	coin;
 	int	exit;
 	int	pos;
 	int	nb_lines;
+}				t_map;
+
+typedef struct	s_coord
+{
 	int	x;
 	int	y;
-}				t_map;
+}				t_coord;
 
 typedef struct	s_vars
 {
 	void	*mlx;
 	void	*win;
 }				t_vars;
+
+typedef struct	s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_pixel;
+	int		line_length;
+	int		endian;
+	int		height;
+	int		width;
+}				t_img;
 
 //Parsing_map
 char	**parsing_map(int argc, char **argv);
@@ -61,6 +71,6 @@ void	check_data(t_map data);
 int	    count_lines(int argc, char **argv);
 
 //Manage window
-void	my_mlx_pixel_put(t_map *map, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *map, int x, int y, int color);
 
 #endif
