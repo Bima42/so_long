@@ -16,8 +16,8 @@ void	draw_map(t_game *game)
 void	create_window(t_game *game)
 {
 //	mlx_get_screen_size(game->mlx, &game->screen_res.x, &game->screen_res.y);
-	game->screen_res.x = 1280;
-	game->screen_res.y = 800;
+	game->screen_res.x = ft_strlen(*game->map) * 40;
+	game->screen_res.y = get_array_size(game->map) * 90;
 	game->size = get_size(game->screen_res, game->map);
 	game->screen_res.x = game->size * ft_strlen(*game->map);
 	game->screen_res.y = game->size * get_array_size(game->map);
