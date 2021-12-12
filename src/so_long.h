@@ -39,12 +39,6 @@ typedef struct	s_coord
 	int	y;
 }				t_coord;
 
-typedef struct	s_vars
-{
-	void	*mlx;
-	void	*win;
-}				t_vars;
-
 typedef struct	s_img
 {
 	void	*img;
@@ -55,6 +49,14 @@ typedef struct	s_img
 	int		height;
 	int		width;
 }				t_img;
+
+typedef struct	s_game
+{
+	char	**map;
+	void	*mlx;
+	void	*mlx_win;
+	t_img	wall;
+}				t_game;
 
 //Parsing_map
 char	**parsing_map(int argc, char **argv);
@@ -72,5 +74,14 @@ int	    count_lines(int argc, char **argv);
 
 //Manage window
 void	my_mlx_pixel_put(t_img *map, int x, int y, int color);
+
+//Draw
+void	draw_map(t_game *game);
+void	texture_load(t_game *game);
+char    *get_sprite_color(t_img *tex, int x, int y, int cubesize);
+void	draw(t_game *game, int x, int y);
+int    color_trans(t_img *tex, char *color);
+void	draw_frame(t_game *game);
+int    my_mlx_pixel_get(t_img t, int x, int y);
 
 #endif

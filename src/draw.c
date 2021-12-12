@@ -1,64 +1,115 @@
 #include "so_long.h"
 
-static void	draw_square(t_root *root, t_img *img, int x, int y)
+void	draw_map(t_game *game)
 {
-	unsigned int	color;
-	int				i;
-	int				j;
+//	t_game	game;
+//	t_img	map;
+	int x = 0, y = 0;;
 
-	j = 0;
-	while (j < 40)
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, 920, 480, "so_long");
+	game->wall.img = mlx_new_image(game->mlx, 920, 480);
+/*	map.addr = mlx_get_data_addr(map.img, &map.bits_pixel, &map.line_length, &map.endian);
+	while (x++ < 100)
 	{
-		i = 0;
-		while (i < 40)
+		y = 0;
+		while (y++ < 100)
+				my_mlx_pixel_put(&map, x, y, 0x00FF0000);
+		my_mlx_pixel_put(&map, x, y, 0x00FF0000);
+	}
+	mlx_put_image_to_window(game.mlx, game.mlx_win, map.img, 0, 0);*/
+	texture_load(game);
+	draw_frame(game);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->wall.img, x, y);
+	mlx_loop(game->mlx);
+}
+
+void	texture_load(t_game *game)
+{
+	game->wall.img = mlx_xpm_file_to_image(game->mlx, "./asset/Wall.xpm", &game->wall.width, &game->wall.height);
+	game->wall.addr = mlx_get_data_addr(game->wall.img, &game->wall.bits_pixel, &game->wall.line_length, &game->wall.endian);
+}
+
+char    *get_sprite_color(t_img *tex, int x, int y, int cubesize)
+{
+    int        txt_x;
+    int        txt_y;
+    char    *color;
+
+    txt_x = 0;
+    txt_y = 0;
+    txt_x = tex->width / (100 / (((double)x / cubesize) * 100.0));
+    txt_y = tex->height / (100 / (((double)y / cubesize) * 100.0));
+    color = tex->addr + ((4 * tex->width * txt_y) + (4 * txt_x));
+    return (color);
+}
+
+int    my_mlx_pixel_get(t_img t, int x, int y)
+{
+    int    color;
+    int    *int_addr;
+
+    int_addr = (int *)t.addr;
+    color = int_addr[y * t.width + (x * t.width)];
+    return (color);
+}
+
+void	draw(t_game *game, int x, int y)
+{
+	t_coord	pos;
+	char	*color;
+	t_img	*tex;
+
+	tex = &game->wall;
+	pos.y = 0;
+	while (pos.y < 40)
+	{
+		pos.x = 0;
+		while (pos.x < 40)
 		{
-			color = mlx_get_pixel(img, i, j);
-			if (color != mlx_rgb_to_int(0, 255, 255, 255))
-				mlx_draw_pixel(root->mlx_img, x + i, y + j, color);
-			i++;
+			color = "";
+			if (tex)
+				color = get_sprite_color(tex, pos.x, pos.y, 40);
+			if (color != NULL)
+				my_mlx_pixel_put(&game->wall, (x * 40) + pos.x, (y * 40) + pos.y, color_trans(tex, color));
+			pos.x++;
 		}
-		j++;
+		pos.y++;
 	}
 }
 
-static void	draw_env(t_root *root, int i, int j)
+int    color_trans(t_img *tex, char *color)
 {
-	int				k;
+    int        transparancy;
+    int        actual;
+    int        background;
 
-	if (root->game->exit.x == i && root->game->exit.y == j)
-		draw_square(root, root->exit, i * 40, j * 40);
-	k = -1;
-	while (++k < root->game->count_coll)
-		if (root->game->coll[k].x == i && root->game->coll[k].y == j)
-			draw_square(root, root->coll, i * 40, j * 40);
-	if (root->game->player.x == i && root->game->player.y == j)
-		draw_square(root, root->player, i * 40, j * 40);
-}
+    background = 0xFFFFFF;
+    if (!tex)
+        return (background);
+    transparancy = my_mlx_pixel_get(*tex, 0, 0);
+    actual = *(int *)color;
+    if (actual == transparancy)
+        return (background);
+    else
+        return (actual);
+} 
 
-static void	draw_map(t_root *root)
+void	draw_frame(t_game *game)
 {
-	int				i;
-	int				j;
+	int	x;
+	int	y;
 
-	j = 0;
-	while (j < root->map->height)
+	x = 0;
+	y = 0;
+	while (game->map[y])
 	{
-		i = 0;
-		while (i < root->map->width)
+		while (game->map[y][x])
 		{
-			if (root->map->map[j][i] == 1)
-				draw_square(root, root->wall, i * 40, j * 40);
-			else
-				draw_square(root, root->ground, i * 40, j * 40);
-			draw_env(root, i, j);
-			i++;
+			draw(game, x, y);
+			x++;
 		}
-		j++;
+		x = 0;
+		y++;
 	}
-}
-
-void	draw(t_root *root)
-{
-	draw_map(root);
-	mlx_put_image_to_window(root->mlx, root->mlx_win, root->mlx_img, 0, 0);
 }
