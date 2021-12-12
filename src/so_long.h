@@ -55,7 +55,9 @@ typedef struct	s_game
 	char	**map;
 	void	*mlx;
 	void	*mlx_win;
+	t_img	img;
 	t_img	wall;
+	t_img	player;
 }				t_game;
 
 //Parsing_map
@@ -83,5 +85,6 @@ void	draw(t_game *game, int x, int y);
 int    color_trans(t_img *tex, char *color);
 void	draw_frame(t_game *game);
 int    my_mlx_pixel_get(t_img t, int x, int y);
+t_img	*texture_choice(t_game *game, char c);
 
 #endif
