@@ -8,6 +8,8 @@ int	redraw(t_game *game)
 
 int	press_key(int keycode, t_game *game)
 {
+	if (keycode == ESCAPE)
+		exit_game(game);
 	if (keycode == UP || keycode == DOWN || keycode == LEFT
 		|| keycode == RIGHT || keycode == W || keycode == S
 		|| keycode == A || keycode == D)
