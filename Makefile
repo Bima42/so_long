@@ -5,10 +5,10 @@ SRCS = 	so_long.c \
 		parsing_map.c \
 		clear.c \
 		draw.c \
-		manage_window.c \
-		hook.c \
+		texture.c \
 		move.c \
 		init.c \
+		utils.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 

@@ -99,32 +99,33 @@ int	    count_lines(int argc, char **argv);
 void	clear_array(char **map);
 int		exit_game(t_game *game);
 
-//Manage window
-void	my_mlx_pixel_put(t_img *map, int x, int y, int color);
-
 //Init
 void	game_init(t_game *game);
+void	create_window(t_game *game);
+void	my_mlx_pixel_put(t_img *map, int x, int y, int color);
 
-//Hook
-int	redraw(t_game *game);
-int	press_key(int keycode, t_game *game);
-
-//Moove
+//Move
 void	move(t_game *game, t_coord next, char *str);
 void	move_player(t_game *game, int side);
-int	is_valid_position(t_game *game, t_coord next);
+void	write_move(t_game *game, char *str);
+int		press_key(int keycode, t_game *game);
+
+//Texture
+void	texture_load(t_game **game);
+void	load_one_texture(t_game *game, t_img *tex, char *path);
+t_img	*texture_choice(t_game *game, char c);
+char    *get_sprite_color(t_img *tex, int x, int y, int cubesize);
 
 //Draw
-void	texture_load(t_game **game);
-char    *get_sprite_color(t_img *tex, int x, int y, int cubesize);
 void	draw(t_game *game, int x, int y);
-int    color_trans(t_img *tex, char *color);
+int		color_trans(t_img *tex, char *color);
 void	draw_frame(t_game *game);
-int    my_mlx_pixel_get(t_img t, int x, int y);
-t_img	*texture_choice(t_game *game, char c);
-void	load_one_texture(t_game *game, t_img *tex, char *path);
-void	create_window(t_game *game);
-int	get_size(t_coord res, char **map);
+int		my_mlx_pixel_get(t_img t, int x, int y);
+int		redraw(t_game *game);
+
+//Utils
 int	get_array_size(char **map);
+int	get_size(t_coord res, char **map);
+int	is_valid_position(t_game *game, t_coord next);
 
 #endif

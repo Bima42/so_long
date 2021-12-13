@@ -15,3 +15,22 @@ void	game_init(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, x, y);
 	mlx_loop(game->mlx);
 }
+
+void	create_window(t_game *game)
+{
+	game->screen_res.x = ft_strlen(*game->map) * 40;
+	game->screen_res.y = get_array_size(game->map) * 90;
+	game->size = get_size(game->screen_res, game->map);
+	game->screen_res.x = game->size * ft_strlen(*game->map);
+	game->screen_res.y = game->size * get_array_size(game->map);
+	game->mlx_win = mlx_new_window(game->mlx, game->screen_res.x, game->screen_res.y, "so_long");
+	game->img.img = mlx_new_image(game->mlx, game->screen_res.x, game->screen_res.y);
+}
+
+void	my_mlx_pixel_put(t_img *map, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = map->addr + (y * map->line_length + x * (map->bits_pixel / 8));
+	*(unsigned int*)dst = color;
+}
