@@ -100,6 +100,7 @@ void	clear_array(char **map);
 int		exit_game(t_game *game);
 
 //Init
+void	init_struct(t_game *game, int argc, char **argv);
 void	game_init(t_game *game);
 void	create_window(t_game *game);
 void	my_mlx_pixel_put(t_img *map, int x, int y, int color);

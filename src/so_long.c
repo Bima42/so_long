@@ -16,11 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	game.player_pos.x = 0;
-	game.player_pos.y = 0;
-	game.coin_count = 0;
-	game.move_count = 0;
-	game.map = parsing_map(argc, argv, &game);
+	init_struct(&game, argc, argv);
 	game_init(&game);
 	return (0);
 }
