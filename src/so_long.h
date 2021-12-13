@@ -98,6 +98,7 @@ int	    count_lines(int argc, char **argv);
 //Clear
 void	clear_array(char **map);
 int		exit_game(t_game *game);
+t_game	*save_window(t_game *game);
 
 //Init
 void	init_struct(t_game *game, int argc, char **argv);

@@ -13,17 +13,17 @@ void	init_struct(t_game *game, int argc, char **argv)
 
 void	game_init(t_game *game)
 {
-	int x = 0, y = 0;
-
 	game->mlx = mlx_init();
 	create_window(game);
 	game->img.addr = mlx_get_data_addr(game->img.img, &game->img.bits_pixel, &game->img.line_length, &game->img.endian);
+	save_window(game);
 	texture_load(&game);
-//	mlx_hook (game->mlx_win, 33, 1L << 17, exit_game, game);
 	mlx_loop_hook(game->mlx, redraw, game);
-	mlx_key_hook(game->mlx_win, press_key, game);
+	mlx_hook(game->mlx_win, 17, 1L<<0 , exit_game, game);
+	mlx_hook(game->mlx_win, 2, 1L<<0, press_key, game);
+	mlx_do_key_autorepeaton(game->mlx);
 	draw_frame(game);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, x, y);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
 	mlx_loop(game->mlx);
 }
 
