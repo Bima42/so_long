@@ -39,7 +39,7 @@ void	init(t_map *map, int lines)
 	map->nb_lines = lines - 1;
 }
 
-void	set_data(char *line, t_map *data)
+void	set_data(char *line, t_map *data, t_game *game)
 {
 	int		i;
 
@@ -55,7 +55,10 @@ void	set_data(char *line, t_map *data)
 		else if (line[i] == 'E')
 			data->exit++;
 		else if (line[i] == 'P')
+		{
+			game->player_pos.x = i;
 			data->pos++;
+		}
 		else
 		{
 			write(1, "Error, caracters can't be used.\n", 32);
@@ -65,12 +68,14 @@ void	set_data(char *line, t_map *data)
 	}
 }
 
-char	*get_line(int fd, t_map *data)
+char	*get_line(int fd, t_map *data, int i, t_game *game)
 {
-	char	*line;
+	char			*line;
 
 	line = get_next_line(fd);
-	set_data(line, data);
+	set_data(line, data, game);
+	if (game->player_pos.x != 0 && game->player_pos.y == 0)
+		game->player_pos.y = i;
 	return (line);
 }
 

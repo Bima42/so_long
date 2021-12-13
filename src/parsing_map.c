@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-char	**parsing_map(int argc, char **argv)
+char	**parsing_map(int argc, char **argv, t_game *game)
 {
 	int		i;
 	int		fd;
@@ -16,12 +16,16 @@ char	**parsing_map(int argc, char **argv)
 	if (!map)
 		return (NULL);
 	while (nb_lines-- > 0)
-		map[i++] = get_line(fd, &data);
+	{
+		map[i] = get_line(fd, &data, i, game);
+		i++;
+	}
 	map[i] = 0;
 	if (close(fd) == -1)
 		exit(0);
 	check_data(data);
 	check_wall(map, data);
+	game->coin_count = data.coin;
 	return (map);
 }
 

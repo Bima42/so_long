@@ -6,6 +6,9 @@ SRCS = 	so_long.c \
 		clear.c \
 		draw.c \
 		manage_window.c \
+		hook.c \
+		move.c \
+		init.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 
