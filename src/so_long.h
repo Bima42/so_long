@@ -86,7 +86,7 @@ char	**parsing_map(int argc, char **argv, t_game *game);
 void	check_wall(char **map, t_map data);
 void	check_wall_2(char **map, t_map data);
 void	check_wall_3(char **map, size_t len);
-void	write_error(void);
+void	write_error(char **map);
 
 //Check_error
 void	init(t_map *map, int lines);

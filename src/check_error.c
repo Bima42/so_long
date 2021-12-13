@@ -81,19 +81,14 @@ char	*get_line(int fd, t_map *data, int i, t_game *game)
 
 void	check_data(t_map data)
 {
-	if (data.coin < 1)
+	if (data.coin < 1 || data.exit < 1 || data.pos < 1)
 	{
-		write(1, "Error, no coin found.\n", 22);
-		exit(0);
-	}
-	if (data.exit < 1)
-	{
-		write(1, "Error, no exit found.\n", 22);
-		exit(0);
-	}
-	if (data.pos < 1)
-	{
-		write(1, "Error, no position found.\n", 26);
+		if (data.coin < 1)
+			write(1, "Error, no coin found.\n", 22);
+		else if (data.exit < 1)
+			write(1, "Error, no exit found.\n", 22);
+		else if (data.pos < 1)
+			write(1, "Error, no position found.\n", 26);
 		exit(0);
 	}
 }

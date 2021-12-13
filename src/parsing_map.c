@@ -29,9 +29,10 @@ char	**parsing_map(int argc, char **argv, t_game *game)
 	return (map);
 }
 
-void	write_error(void)
+void	write_error(char **map)
 {
 	write(1, "Error wall\n", 11);
+	clear_array(map);
 	exit(0);
 }
 
@@ -47,7 +48,7 @@ void	check_wall(char **map, t_map data)
 		if (len == ft_strlen(map[i]) - 1)
 			i++;
 		else
-			write_error();
+			write_error(map);
 	}
 	check_wall_2(map, data);
 	check_wall_3(map, len);
@@ -63,7 +64,7 @@ void	check_wall_2(char **map, t_map data)
 		if (map[0][i] == '1')
 			i++;
 		else
-			write_error();
+			write_error(map);
 	}
 	i = 0;
 	while (map[data.nb_lines][i])
@@ -71,7 +72,7 @@ void	check_wall_2(char **map, t_map data)
 		if (map[data.nb_lines][i] == '1')
 			i++;
 		else
-			write_error();
+			write_error(map);
 	}
 }
 
@@ -85,7 +86,7 @@ void	check_wall_3(char **map, size_t len)
 		if (map[i][0] == '1')
 			i++;
 		else
-			write_error();
+			write_error(map);
 	}
 	i = 0;
 	while (map[i])
@@ -93,11 +94,12 @@ void	check_wall_3(char **map, size_t len)
 		if (map[i][len] == '1')
 			i++;
 		else
-			write_error();
+			write_error(map);
 	}
 	if (i >= (int)len)
 	{
 		write(1, "Map is not rectangular\n", 23);
+		clear_array(map);
 		exit(0);
 	}
 }
