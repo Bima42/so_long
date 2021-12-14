@@ -12,14 +12,29 @@ SRCS = 	so_long.c \
 		get_next_line/get_next_line.c \
 		get_next_line/get_next_line_utils.c
 
+SRCS_BONUS	=	so_long_bonus.c \
+				check_error_bonus.c \
+				parsing_map_bonus.c \
+				clear_bonus.c \
+				draw_bonus.c \
+				texture_bonus.c \
+				move_bonus.c \
+				init_bonus.c \
+				utils_bonus.c \
+				get_next_line/get_next_line.c \
+
 SRCS_DIR = src
+BONUS_DIR = bonus
 
 OBJS = $(SRCS:.c=.o)
+BONUS_OBJS = $(SRCS_BONUS:.c=.o)
+
 OBJS_DIR = obj
 DIRS = obj obj/get_next_line
 
 _SRCS= $(addprefix $(SRCS_DIR)/, $(SRCS))
 _OBJS = $(addprefix $(OBJS_DIR)/, $(OBJS))
+_OBJS_BONUS = $(addprefix $(OBJS_DIR)/, $(BONUS_OBJS))
 
 HEADERS = src
 MLX_DIR = mlx
