@@ -32,7 +32,7 @@ int    color_trans(t_img *tex, char *color)
     int        actual;
     int        background;
 
-    background = 0xFFFFFF;
+    background = 0xFFCC99;
     if (!tex)
         return (background);
     transparancy = my_mlx_pixel_get(*tex, 0, 0);

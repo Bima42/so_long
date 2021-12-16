@@ -99,7 +99,7 @@ int	press_key(int keycode, t_game *game)
 
 void    anim(t_game *game, int *i)
 {
-    if (*i >= 80)
+    if (*i >= 100)
     {
         monster_move(game);
         draw_frame(game);
@@ -126,6 +126,7 @@ int    monster_next_move(t_game *game, int next_x)
 void    monster_move(t_game *game)
 {
     static int    flag = 0;
+    static int    dir = 0;
     int        x;
 
     if (flag == 0)
@@ -135,6 +136,16 @@ void    monster_move(t_game *game)
             flag = 1;
         else
         {
+			if (dir == 0)
+			{
+				game->monster = game->monster_side_right;
+				dir = 1;
+			}
+			else
+			{
+				dir = 0;
+				game->monster = game->monster_walk_r;
+			}
             game->map[game->monster_pos.y][game->monster_pos.x] = '0';
             game->map[game->monster_pos.y][x] = 'M';
             game->monster_pos.x = x;
@@ -147,6 +158,16 @@ void    monster_move(t_game *game)
             flag = 0;
         else
         {
+			if (dir == 0)
+			{
+				dir = 1;
+				game->monster = game->monster_side_left;
+			}
+			else
+			{
+				dir = 0;
+				game->monster = game->monster_walk_l;
+			}
             game->map[game->monster_pos.y][x] = 'M';
             game->map[game->monster_pos.y][game->monster_pos.x] = '0';
             game->monster_pos.x = x;

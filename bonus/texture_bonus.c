@@ -3,6 +3,10 @@
 void	texture_load(t_game **game)
 {
 	load_one_texture(*game, &(*game)->monster, "./asset/monster_front.xpm");
+	load_one_texture(*game, &(*game)->monster_side_left, "./asset/monster_side_left.xpm");
+	load_one_texture(*game, &(*game)->monster_side_right, "./asset/monster_side_right.xpm");
+	load_one_texture(*game, &(*game)->monster_walk_l, "./asset/monster_walk_l.xpm");
+	load_one_texture(*game, &(*game)->monster_walk_r, "./asset/monster_walk_r.xpm");
 	load_one_texture(*game, &(*game)->player, "./asset/player_front.xpm");
 	load_one_texture(*game, &(*game)->player_front, "./asset/player_front.xpm");
 	load_one_texture(*game, &(*game)->player_back, "./asset/player_back.xpm");

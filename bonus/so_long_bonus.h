@@ -66,17 +66,17 @@ typedef struct	s_img
 
 typedef struct	s_game
 {
-	char	**map;
-	void	*mlx;
-	void	*mlx_win;
-	int		nb_lines;
-	int		size;
-	int		coin_count;
-	int		move_count;
-	t_coord	screen_res;
-	t_coord	player_pos;
-	t_coord	monster_pos;
-	t_img	img;
+	char		**map;
+	void		*mlx;
+	void		*mlx_win;
+	int			nb_lines;
+	int			size;
+	int			coin_count;
+	int			move_count;
+	t_coord		screen_res;
+	t_coord		player_pos;
+	t_coord		monster_pos;
+	t_img		img;
 	t_img	angle_top_left;
 	t_img	angle_top_right;
 	t_img	angle_bot_left;
@@ -91,6 +91,10 @@ typedef struct	s_game
 	t_img	player_left;
 	t_img	player_right;
 	t_img	monster;
+	t_img	monster_side_left;
+	t_img	monster_side_right;
+	t_img	monster_walk_l;
+	t_img	monster_walk_r;
 	t_img	door;
 	t_img	item;
 }				t_game;
