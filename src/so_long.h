@@ -69,13 +69,21 @@ typedef struct	s_game
 	char	**map;
 	void	*mlx;
 	void	*mlx_win;
+	int		nb_lines;
 	int		size;
 	int		coin_count;
 	int		move_count;
 	t_coord	screen_res;
 	t_coord	player_pos;
 	t_img	img;
-	t_img	wall;
+	t_img	angle_top_left;
+	t_img	angle_top_right;
+	t_img	angle_bot_left;
+	t_img	angle_bot_right;
+	t_img	wall_top;
+	t_img	wall_bot;
+	t_img	wall_right;
+	t_img	wall_left;
 	t_img	player;
 	t_img	door;
 	t_img	item;
@@ -105,6 +113,7 @@ void	init_struct(t_game *game, int argc, char **argv);
 void	game_init(t_game *game);
 void	create_window(t_game *game);
 void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
+void	set_angle(t_game *game);
 
 //Move
 void	move(t_game *game, t_coord next, char *str);
@@ -115,7 +124,7 @@ int		press_key(int keycode, t_game *game);
 //Texture
 void	texture_load(t_game **game);
 void	load_one_texture(t_game *game, t_img *tex, char *path);
-t_img	*texture_choice(t_game *game, char c);
+t_img	*texture_choice(t_game *game, char c, int y, int x);
 char    *get_sprite_color(t_img *tex, int x, int y, int size);
 
 //Draw

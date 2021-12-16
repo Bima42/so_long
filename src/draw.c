@@ -6,7 +6,7 @@ void	draw(t_game *game, int x, int y)
 	char	*color;
 	t_img	*tex;
 
-	tex = texture_choice(game, game->map[y][x]);
+	tex = texture_choice(game, game->map[y][x], y, x);
 	pos.y = 0;
 	while (pos.y < game->size)
 	{

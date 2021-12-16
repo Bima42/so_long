@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	clear_array(char **map)
 {
@@ -16,7 +16,14 @@ int	exit_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->img.img);
 	mlx_destroy_image(game->mlx, game->player.img);
 	mlx_destroy_image(game->mlx, game->item.img);
-	mlx_destroy_image(game->mlx, game->wall.img);
+	mlx_destroy_image(game->mlx, game->angle_top_left.img);
+	mlx_destroy_image(game->mlx, game->angle_top_right.img);
+	mlx_destroy_image(game->mlx, game->angle_bot_left.img);
+	mlx_destroy_image(game->mlx, game->angle_bot_right.img);
+	mlx_destroy_image(game->mlx, game->wall_top.img);
+	mlx_destroy_image(game->mlx, game->wall_bot.img);
+	mlx_destroy_image(game->mlx, game->wall_right.img);
+	mlx_destroy_image(game->mlx, game->wall_left.img);
 	mlx_destroy_image(game->mlx, game->door.img);
 	mlx_destroy_window(game->mlx, game->mlx_win);
 	clear_array(game->map);

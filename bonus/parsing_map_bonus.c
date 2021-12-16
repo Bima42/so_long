@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 char	**parsing_map(int argc, char **argv, t_game *game)
 {
@@ -15,6 +15,7 @@ char	**parsing_map(int argc, char **argv, t_game *game)
 	map = malloc(sizeof(char *) * nb_lines + 1);
 	if (!map)
 		return (NULL);
+	game->nb_lines = nb_lines - 1;
 	while (nb_lines-- > 0)
 	{
 		map[i] = get_line(fd, &data, i, game);
