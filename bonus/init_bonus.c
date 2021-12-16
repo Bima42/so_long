@@ -62,4 +62,9 @@ void	set_angle(t_game *game)
 		y++;
 	game->map[--y][x] = 'A';
 	game->map[y][0] = 'A';
+	while (game->map[y--][x] != '0')
+		x--;
+	game->map[y][x] = 'M';
+	game->monster_pos.x = x;
+	game->monster_pos.y = y;
 }

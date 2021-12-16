@@ -74,7 +74,11 @@ int    my_mlx_pixel_get(t_img t, int x, int y)
 
 int	redraw(t_game *game)
 {
+	static int	i = 0;
+
+	anim(game, &i);
+	i++;
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
+	print_move(game);
 	return (1);
 }
-

@@ -2,7 +2,12 @@
 
 void	texture_load(t_game **game)
 {
-	load_one_texture(*game, &(*game)->player, "./asset/player.xpm");
+	load_one_texture(*game, &(*game)->monster, "./asset/monster_front.xpm");
+	load_one_texture(*game, &(*game)->player, "./asset/player_front.xpm");
+	load_one_texture(*game, &(*game)->player_front, "./asset/player_front.xpm");
+	load_one_texture(*game, &(*game)->player_back, "./asset/player_back.xpm");
+	load_one_texture(*game, &(*game)->player_left, "./asset/player_left.xpm");
+	load_one_texture(*game, &(*game)->player_right, "./asset/player_right.xpm");
 	load_one_texture(*game, &(*game)->door, "./asset/door.xpm");
 	load_one_texture(*game, &(*game)->item, "./asset/item.xpm");
 	load_one_texture(*game, &(*game)->wall_top, "./asset/wall_top.xpm");
@@ -59,6 +64,8 @@ t_img	*texture_choice(t_game *game, char c, int y, int x)
 		return (&game->door);
 	else if (c == 'C')
 		return (&game->item);
+	else if (c == 'M')
+		return (&game->monster);
 	else if (c == '0')
 		return (NULL);
 	return (NULL);

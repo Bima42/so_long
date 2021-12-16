@@ -2,7 +2,7 @@
 
 void	texture_load(t_game **game)
 {
-	load_one_texture(*game, &(*game)->player, "./asset/player.xpm");
+	load_one_texture(*game, &(*game)->player, "./asset/player_front.xpm");
 	load_one_texture(*game, &(*game)->door, "./asset/door.xpm");
 	load_one_texture(*game, &(*game)->item, "./asset/item.xpm");
 	load_one_texture(*game, &(*game)->wall_top, "./asset/wall_top.xpm");

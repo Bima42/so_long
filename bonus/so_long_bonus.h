@@ -75,6 +75,7 @@ typedef struct	s_game
 	int		move_count;
 	t_coord	screen_res;
 	t_coord	player_pos;
+	t_coord	monster_pos;
 	t_img	img;
 	t_img	angle_top_left;
 	t_img	angle_top_right;
@@ -85,6 +86,11 @@ typedef struct	s_game
 	t_img	wall_right;
 	t_img	wall_left;
 	t_img	player;
+	t_img	player_front;
+	t_img	player_back;
+	t_img	player_left;
+	t_img	player_right;
+	t_img	monster;
 	t_img	door;
 	t_img	item;
 }				t_game;
@@ -119,7 +125,11 @@ void	set_angle(t_game *game);
 void	move(t_game *game, t_coord next, char *str);
 void	move_player(t_game *game, int side);
 void	write_move(t_game *game, char *str);
+void	monster_move(t_game *game);
+void	anim(t_game *game, int *i);
 int		press_key(int keycode, t_game *game);
+int		monster_next_move(t_game *game, int next_x);
+void	print_move(t_game *game);
 
 //Texture
 void	texture_load(t_game **game);
