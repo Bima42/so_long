@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "../so_long.h"
 
 char	*ft_strdup(const char *s1)
 {

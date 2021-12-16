@@ -8,22 +8,24 @@ void	draw(t_game *game, int x, int y)
 
 	tex = texture_choice(game, game->map[y][x]);
 	pos.y = 0;
-	while (pos.y < 40)
+	while (pos.y < game->size)
 	{
 		pos.x = 0;
-		while (pos.x < 40)
+		while (pos.x < game->size)
 		{
 			color = "";
 			if (tex)
-				color = get_sprite_color(tex, pos.x, pos.y, 40);
+				color = get_sprite_color(tex, pos.x, pos.y, game->size);
 			if (color != NULL)
-				my_mlx_pixel_put(&game->img, (x * 40) + pos.x, (y * 40) + pos.y, color_trans(tex, color));
+				my_mlx_pixel_put(&game->img, (x * game->size) + pos.x, (y * game->size) + pos.y, color_trans(tex, color));
 			pos.x++;
 		}
 		pos.y++;
 	}
 }
 
+//This function set the background on the first pixel
+//Which means every other pixel the same color will get background color
 int    color_trans(t_img *tex, char *color)
 {
     int        transparancy;

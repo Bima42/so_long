@@ -29,16 +29,16 @@ t_img	*texture_choice(t_game *game, char c)
 	return (NULL);
 }
 
-char    *get_sprite_color(t_img *tex, int x, int y, int cubesize)
+char    *get_sprite_color(t_img *tex, int x, int y, int size)
 {
-    int        txt_x;
-    int        txt_y;
-    char    *color;
+    int		txt_x;
+    int		txt_y;
+    char	*color;
 
     txt_x = 0;
     txt_y = 0;
-    txt_x = tex->width / (100 / (((double)x / cubesize) * 100.0));
-    txt_y = tex->height / (100 / (((double)y / cubesize) * 100.0));
+    txt_x = tex->width / (100 / (((double)x / size) * 100.0));
+    txt_y = tex->height / (100 / (((double)y / size) * 100.0));
     color = tex->addr + ((4 * tex->width * txt_y) + (4 * txt_x));
     return (color);
 }

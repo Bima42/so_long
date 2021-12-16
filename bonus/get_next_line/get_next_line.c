@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "../so_long.h"
 
 static int	index_new_line(char *buf);
 static void	clear(char **keep);

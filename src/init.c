@@ -38,10 +38,10 @@ void	create_window(t_game *game)
 	game->img.img = mlx_new_image(game->mlx, game->screen_res.x, game->screen_res.y);
 }
 
-void	my_mlx_pixel_put(t_img *map, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = map->addr + (y * map->line_length + x * (map->bits_pixel / 8));
+	dst = img->addr + (y * img->line_length + x * (img->bits_pixel / 8));
 	*(unsigned int*)dst = color;
 }

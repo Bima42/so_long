@@ -104,7 +104,7 @@ t_game	*save_window(t_game *game);
 void	init_struct(t_game *game, int argc, char **argv);
 void	game_init(t_game *game);
 void	create_window(t_game *game);
-void	my_mlx_pixel_put(t_img *map, int x, int y, int color);
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color);
 
 //Move
 void	move(t_game *game, t_coord next, char *str);
@@ -116,7 +116,7 @@ int		press_key(int keycode, t_game *game);
 void	texture_load(t_game **game);
 void	load_one_texture(t_game *game, t_img *tex, char *path);
 t_img	*texture_choice(t_game *game, char c);
-char    *get_sprite_color(t_img *tex, int x, int y, int cubesize);
+char    *get_sprite_color(t_img *tex, int x, int y, int size);
 
 //Draw
 void	draw(t_game *game, int x, int y);
