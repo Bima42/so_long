@@ -18,6 +18,9 @@ SRCS_BONUS	=	so_long_bonus.c \
 				clear_bonus.c \
 				draw_bonus.c \
 				texture_bonus.c \
+				print_bonus.c \
+				monster_move_bonus.c \
+				anim_bonus.c \
 				move_bonus.c \
 				init_bonus.c \
 				utils_bonus.c \

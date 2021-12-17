@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   clear.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 14:21:26 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/12/17 16:14:19 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	clear_array(char **map)
@@ -5,8 +17,8 @@ void	clear_array(char **map)
 	int	i;
 
 	i = 0;
-	while (map[i++])
-		free(map[i]);
+	while (map[i])
+		free(map[i++]);
 	free(map);
 }
 

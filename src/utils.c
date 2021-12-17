@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 14:22:02 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/12/17 14:49:55 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	get_size(t_coord res, char **map)
@@ -46,4 +58,18 @@ int	is_valid_position(t_game *game, t_coord next)
 	out = ((next.x > 0 && next.x < (int)ft_strlen(*game->map))
 			&& (next.y > 0 && next.y < (int)get_array_size(game->map)));
 	return (out);
+}
+
+char	*get_sprite_color(t_img *tex, int x, int y, int size)
+{
+	int		txt_x;
+	int		txt_y;
+	char	*color;
+
+	txt_x = 0;
+	txt_y = 0;
+	txt_x = tex->width / (100 / (((double)x / size) * 100.0));
+	txt_y = tex->height / (100 / (((double)y / size) * 100.0));
+	color = tex->addr + ((4 * tex->width * txt_y) + (4 * txt_x));
+	return (color);
 }

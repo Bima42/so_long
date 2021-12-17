@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_error.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 14:21:22 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/12/17 16:14:03 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 int	count_lines(int argc, char **argv)
@@ -16,7 +28,6 @@ int	count_lines(int argc, char **argv)
 		while (1)
 		{
 			line = get_next_line(fd);
-			//ADD CHECK ERROR HERE
 			if (line == NULL)
 			{
 				if (close(fd) == -1)
@@ -24,6 +35,7 @@ int	count_lines(int argc, char **argv)
 				return (nb_lines);
 			}
 			nb_lines++;
+			free(line);
 		}
 	}
 	return (nb_lines);

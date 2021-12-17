@@ -1,4 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   move.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 14:21:39 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/12/17 15:15:48 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
+
+void	call_end_game(t_game *game, char *str)
+{
+	write_move(game, str);
+	ft_putstr_fd("                            \r", STDOUT_FILENO);
+	ft_putstr_fd("You win\n", STDOUT_FILENO);
+	exit_game(game);
+}
 
 void	move(t_game *game, t_coord next, char *str)
 {
@@ -7,12 +27,7 @@ void	move(t_game *game, t_coord next, char *str)
 		if (game->map[next.y][next.x] == 'E')
 		{
 			if (game->coin_count == 0)
-			{
-				write_move(game, str);
-				ft_putstr_fd("                            \r", STDOUT_FILENO);
-				ft_putstr_fd("You win\n", STDOUT_FILENO);
-				exit_game(game);
-			}
+				call_end_game(game, str);
 			else
 				ft_putendl_fd(CANT_EXIT, STDOUT_FILENO);
 		}

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 14:21:29 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/12/17 14:30:16 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 void	draw(t_game *game, int x, int y)
@@ -17,7 +29,8 @@ void	draw(t_game *game, int x, int y)
 			if (tex)
 				color = get_sprite_color(tex, pos.x, pos.y, game->size);
 			if (color != NULL)
-				my_mlx_pixel_put(&game->img, (x * game->size) + pos.x, (y * game->size) + pos.y, color_trans(tex, color));
+				my_mlx_pixel_put(&game->img, (x * game->size) + pos.x,
+					(y * game->size) + pos.y, color_trans(tex, color));
 			pos.x++;
 		}
 		pos.y++;
@@ -26,22 +39,22 @@ void	draw(t_game *game, int x, int y)
 
 //This function set the background on the first pixel
 //Which means every other pixel the same color will get background color
-int    color_trans(t_img *tex, char *color)
+int	color_trans(t_img *tex, char *color)
 {
-    int        transparancy;
-    int        actual;
-    int        background;
+	int	transparancy;
+	int	actual;
+	int	background;
 
-    background = 0xFFFFFF;
-    if (!tex)
-        return (background);
-    transparancy = my_mlx_pixel_get(*tex, 0, 0);
-    actual = *(int *)color;
-    if (actual == transparancy)
-        return (background);
-    else
-        return (actual);
-} 
+	background = 0xFFFFFF;
+	if (!tex)
+		return (background);
+	transparancy = my_mlx_pixel_get(*tex, 0, 0);
+	actual = *(int *)color;
+	if (actual == transparancy)
+		return (background);
+	else
+		return (actual);
+}
 
 void	draw_frame(t_game *game)
 {
@@ -62,14 +75,14 @@ void	draw_frame(t_game *game)
 	}
 }
 
-int    my_mlx_pixel_get(t_img t, int x, int y)
+int	my_mlx_pixel_get(t_img t, int x, int y)
 {
-    int    color;
-    int    *int_addr;
+	int	color;
+	int	*int_addr;
 
-    int_addr = (int *)t.addr;
-    color = int_addr[y * t.width + (x * t.width)];
-    return (color);
+	int_addr = (int *)t.addr;
+	color = int_addr[y * t.width + (x * t.width)];
+	return (color);
 }
 
 int	redraw(t_game *game)
@@ -77,4 +90,3 @@ int	redraw(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->img.img, 0, 0);
 	return (1);
 }
-

@@ -1,33 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_map_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/17 13:51:10 by tpauvret          #+#    #+#             */
+/*   Updated: 2021/12/17 16:41:53 by tpauvret         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long_bonus.h"
 
-char	**parsing_map(int argc, char **argv, t_game *game)
+void	parsing_map(int argc, char **argv, t_game *game)
 {
 	int		i;
 	int		fd;
 	int		nb_lines;
-	char	**map;
 	t_map	data;
 
 	i = 0;
 	nb_lines = count_lines(argc, argv);
 	init(&data, nb_lines);
 	fd = open(argv[1], O_RDONLY);
-	map = malloc(sizeof(char *) * nb_lines + 1);
-	if (!map)
-		return (NULL);
+	game->map = malloc(sizeof(char *) * nb_lines + 1);
+	if (!game->map)
+		return ;
 	game->nb_lines = nb_lines - 1;
 	while (nb_lines-- > 0)
 	{
-		map[i] = get_line(fd, &data, i, game);
+		game->map[i] = get_line(fd, &data, i, game);
 		i++;
 	}
-	map[i] = 0;
+	game->map[i] = 0;
 	if (close(fd) == -1)
 		exit(0);
 	check_data(data);
-	check_wall(map, data);
+	check_wall(game->map, data);
 	game->coin_count = data.coin;
-	return (map);
 }
 
 void	write_error(char **map)
