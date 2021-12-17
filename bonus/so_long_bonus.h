@@ -97,6 +97,11 @@ typedef struct	s_game
 	t_img	monster_walk_r;
 	t_img	door;
 	t_img	item;
+	t_img	item_1;
+	t_img	item_2;
+	t_img	item_3;
+	t_img	item_4;
+	t_img	item_5;
 }				t_game;
 
 //Parsing_map

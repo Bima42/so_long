@@ -13,7 +13,12 @@ void	texture_load(t_game **game)
 	load_one_texture(*game, &(*game)->player_left, "./asset/player_left.xpm");
 	load_one_texture(*game, &(*game)->player_right, "./asset/player_right.xpm");
 	load_one_texture(*game, &(*game)->door, "./asset/door.xpm");
-	load_one_texture(*game, &(*game)->item, "./asset/item.xpm");
+	load_one_texture(*game, &(*game)->item, "./asset/item_5.xpm");
+	load_one_texture(*game, &(*game)->item_1, "./asset/item_1.xpm");
+	load_one_texture(*game, &(*game)->item_2, "./asset/item_2.xpm");
+	load_one_texture(*game, &(*game)->item_3, "./asset/item_3.xpm");
+	load_one_texture(*game, &(*game)->item_4, "./asset/item_4.xpm");
+	load_one_texture(*game, &(*game)->item_5, "./asset/item_5.xpm");
 	load_one_texture(*game, &(*game)->wall_top, "./asset/wall_top.xpm");
 	load_one_texture(*game, &(*game)->wall_bot, "./asset/wall_bot.xpm");
 	load_one_texture(*game, &(*game)->wall_left, "./asset/wall_left.xpm");
@@ -67,7 +72,7 @@ t_img	*texture_choice(t_game *game, char c, int y, int x)
 	else if (c == 'E')
 		return (&game->door);
 	else if (c == 'C')
-		return (&game->item);
+		return (&game->item_1);
 	else if (c == 'M')
 		return (&game->monster);
 	else if (c == '0')
