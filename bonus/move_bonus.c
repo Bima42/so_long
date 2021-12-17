@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 16:21:19 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/12/17 18:18:28 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:21:47 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	move_player(t_game *game, int side)
 		move(game, pos, "Move right");
 	}
 	else if (side == UP || side == W
-			|| side == DOWN || side == S)
+		|| side == DOWN || side == S)
 		move_player_2(game, side, pos);
 }
 
