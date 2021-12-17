@@ -1,108 +1,103 @@
 NAME = so_long
 
-SRCS = 	so_long.c \
-		check_error.c \
-		parsing_map.c \
-		clear.c \
-		draw.c \
-		texture.c \
-		move.c \
-		init.c \
-		utils.c \
-		get_next_line/get_next_line.c \
-		get_next_line/get_next_line_utils.c
-
-SRCS_BONUS	=	so_long_bonus.c \
-				check_error_bonus.c \
-				parsing_map_bonus.c \
-				clear_bonus.c \
-				draw_bonus.c \
-				texture_bonus.c \
-				print_bonus.c \
-				monster_move_bonus.c \
-				anim_bonus.c \
-				move_bonus.c \
-				init_bonus.c \
-				utils_bonus.c \
-				get_next_line/get_next_line.c \
-
-SRCS_DIR = src
-SRCS_BONUS_DIR = bonus
-
-OBJS = $(SRCS:.c=.o)
-OBJS_DIR = obj
-DIRS = obj obj/get_next_line
-
-BONUS_OBJS = $(SRCS_BONUS:.c=.o)
-OBJS_BONUS_DIR = obj_bonus
-DIRS_BONUS = obj_bonus obj_bonus/get_next_line
-
-_SRCS =  $(addprefix $(SRCS_DIR)/, $(SRCS))
-_OBJS = $(addprefix $(OBJS_DIR)/, $(OBJS))
-
-_SRCS_BONUS =  $(addprefix $(SRCS_BONUS_DIR)/, $(SRCS_BONUS))
-_OBJS_BONUS = $(addprefix $(OBJS_BONUS_DIR)/, $(BONUS_OBJS))
-
-HEADERS = src
-MLX_DIR = mlx
-LIBFT = libft.a
-LIBFT_DIR = libft
+NAME_BONUS = so_long_bonus
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -I $(HEADERS)
-LFLAGS = $(CFLAGS) -lmlx -framework OpenGL -framework AppKit -L $(MLX_DIR) #-fsanitize=address -g
 
-UNAME = $(shell uname -s)
-ifeq ($(UNAME), Linux)
-    LFLAGS = $(CFLAGS) -lmlx -lXext -lX11 -lm -L $(MLX_DIR)
-endif
+CFLAGS = -Wall -Wextra -Werror
 
-all: $(NAME)
+MLX_PATH = mlx/
 
-$(_OBJS): $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c $(DIRS) $(LIBFT_DIR)/$(LIBFT) mlx
-		$(CC) -c $(CFLAGS) $< -o $@
+MLX_LIB = $(MLX_PATH)libmlx.a
 
-$(NAME): $(_OBJS)
-		$(CC) $(_OBJS) $(LIBFT_DIR)/$(LIBFT) $(LFLAGS) -o $(NAME)
+MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
-bonus:	$(_OBJS_BONUS)
-		$(CC) $(_OBJS_BONUS) $(LIBFT_DIR)/$(LIBFT) $(LFLAGS) -o $(NAME)_bonus
+LIBFT_PATH = libft/
 
-$(_OBJS_BONUS): $(OBJS_BONUS_DIR)/%.o : $(SRCS_BONUS_DIR)/%.c $(DIRS_BONUS) $(LIBFT_DIR)/$(LIBFT) mlx
-		$(CC) -c $(CFLAGS) $< -o $@
+LIBFT_LIB = $(LIBFT_PATH)libft.a
 
-$(LIBFT_DIR)/$(LIBFT):
-		$(MAKE) -C $(LIBFT_DIR) all
-		$(MAKE) -C $(LIBFT_DIR) bonus
-		cp $(LIBFT_DIR)/libft.h $(HEADERS)/libft.h
+Y = "\033[33m"
+R = "\033[31m"
+G = "\033[32m"
+B = "\033[34m"
+X = "\033[0m"
+UP = "\033[A"
+CUT = "\033[K"
 
-mlx:
-			@echo "=========== Compiling MinilibX ==========="
-			$(MAKE) -C $(MLX_DIR)
-			cp $(MLX_DIR)/mlx.h $(HEADERS)/mlx.h
-			@echo "========= End Compiling MinilibX ========="
+CFILES = \
+		src/so_long.c\
+		src/check_error.c\
+		src/parsing_map.c\
+		src/clear.c\
+		src/draw.c\
+		src/texture.c\
+		src/init.c\
+		src/move.c\
+		src/utils.c\
+		src/get_next_line/get_next_line.c\
+		src/get_next_line/get_next_line_utils.c
 
-mlx_clean:
-			@echo "=========== Compiling MinilibX ==========="
-			$(MAKE) -C $(MLX_DIR) clean
-			rm $(HEADERS)/mlx.h
-			@echo "========= End Compiling MinilibX ========="
 
-$(DIRS):
-			mkdir -p $(DIRS)
+SRCS_BONUS	= \
+		bonus/so_long_bonus.c\
+		bonus/anim_bonus.c\
+		bonus/print_bonus.c\
+		bonus/monster_move_bonus.c\
+		bonus/check_error_bonus.c\
+		bonus/parsing_map_bonus.c\
+		bonus/clear_bonus.c\
+		bonus/draw_bonus.c\
+		bonus/texture_bonus.c\
+		bonus/move_bonus.c\
+		bonus/init_bonus.c\
+		bonus/utils_bonus.c\
+		bonus/get_next_line/get_next_line.c\
+		bonus/get_next_line/get_next_line_utils.c
 
-$(DIRS_BONUS):
-			mkdir -p $(DIRS_BONUS)
+OBJECTS = $(CFILES:.c=.o)
+OBJ_BONUS = $(SRCS_BONUS:.c=.o)
+
+all: subsystems $(NAME)
+
+%.o : %.c
+	@echo $(Y)Compiling [$<]...$(X)
+	@$(CC) $(CFLAGS) -Imlx -c -o $@ $<
+	@printf $(UP)$(CUT)
+
+subsystems:
+	@echo $(B)
+	make -C $(MLX_PATH) all
+	@echo $(B)
+	make -C $(LIBFT_PATH) all
+
+$(NAME): $(OBJECTS)
+	@echo $(Y)Compiling [$(CFILES)]...$(X)
+	@echo $(G)Finished [$(CFILES)]$(X)
+	@echo
+	@echo $(Y)Compiling [$(NAME)]...$(X)
+	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJECTS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME)
+	@echo $(G)Finished [$(NAME)]$(X)
+
+$(NAME_BONUS): $(OBJ_BONUS)
+	@echo $(Y)Compiling [$(SRCS_BONUS)]...$(X)
+	@echo $(G)Finished [$(SRCS_BONUS)]$(X)
+	@echo
+	@echo $(Y)Compiling [$(NAME_BONUS)]...$(X)
+	@$(CC) $(CFLAGS) $(MLX_FLAGS) $(OBJ_BONUS) $(MLX_LIB) $(LIBFT_LIB) -o $(NAME_BONUS)
+	@echo $(G)Finished [$(NAME_BONUS)]$(X)
+
+bonus: $(NAME_BONUS)
 
 clean:
-			rm -rf $(OBJS_DIR)
-			rm -rf $(OBJS_BONUS_DIR)
-			$(MAKE) -C $(LIBFT_DIR) clean
+	@make -C $(MLX_PATH) clean
+	@make -C $(LIBFT_PATH) clean
+	@rm -f $(OBJECTS) $(OBJ_BONUS)
+	@echo $(R)Removed [$(OBJECTS)][$(OBJ_BONUS)]$(X)
 
-fclean:
-			rm -rf $(OBJS_DIR) $(NAME)
-			rm -rf $(OBJS_BONUS_DIR) $(NAME)_bonus
-			$(MAKE) -C $(LIBFT_DIR) fclean
+fclean: clean
+	@rm -f $(NAME) $(NAME_BONUS)
+	@echo $(R)Removed [$(NAME)][$(NAME_BONUS)]$(X)
 
 re: fclean all
-.PHONY : all mlx bonus mlx_clean clean fclean re
+
+.PHONY: all clean fclean re bonus
