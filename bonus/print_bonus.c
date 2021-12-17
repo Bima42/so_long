@@ -6,7 +6,7 @@
 /*   By: tpauvret <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/17 17:10:47 by tpauvret          #+#    #+#             */
-/*   Updated: 2021/12/17 17:41:50 by tpauvret         ###   ########.fr       */
+/*   Updated: 2021/12/17 18:20:08 by tpauvret         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,21 @@
 void	call_end_game(t_game *game, char *str)
 {
 	write_move(game, str);
-	ft_putstr_fd("								\r", STDOUT_FILENO);
+	ft_putstr_fd("                             \r", STDOUT_FILENO);
 	ft_putstr_fd("You win\n", STDOUT_FILENO);
 	exit_game(game);
 }
 
 void	call_loss_game(t_game *game)
 {
-	ft_putstr_fd("								\r", STDOUT_FILENO);
-	ft_putstr_fd("You loss\n", STDOUT_FILENO);
+	ft_putstr_fd("                             \r", STDOUT_FILENO);
+	ft_putstr_fd("You died, avoid the monster !\n", STDOUT_FILENO);
 	exit_game(game);
 }
 
 void	write_move(t_game *game, char *str)
 {
-//	char	*count;
-
-//	count = ft_itoa(++game->move_count);
-	ft_putstr_fd("								", STDOUT_FILENO);
+	ft_putstr_fd("                               ", STDOUT_FILENO);
 	ft_putstr_fd("\r", STDOUT_FILENO);
 	ft_putstr_fd(str, STDOUT_FILENO);
 	ft_putstr_fd(", count: ", STDOUT_FILENO);
